@@ -81,6 +81,7 @@ git clone https://github.com/spartazhc/dotfiles.git .dotfiles
 cd .dotfiles
 git clone https://github.com/anishathalye/dotbot.git dotbot
 ./install
+./install_plugins.sh
 
 ### restart zsh, need adding some plugins, now we should open the proxy because git sometimes do not work.
 
