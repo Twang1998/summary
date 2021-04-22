@@ -160,3 +160,30 @@ git config user.email=''
 git config github.token=''
 ~~~
 
+
+
+通过 SSH 协议克隆版本库，你可以指定一个 ssh:// 的 URL：
+ git clone ssh://[user@]server/project.git
+或者使用一个简短的 scp 式的写法：
+​git clone [user@]server:project.git
+
+
+
+由于在现代的 Linux 发行版中，systemd 是最常见的初始化系统，因此你可以用它来达到此目的。 只要在
+/etc/systemd/system/git-daemon.service 中放一个文件即可，其内容如下：
+[Unit]
+Description=Start Git Daemon
+[Service]
+ExecStart=/usr/bin/git daemon --reuseaddr --base-path=/srv/git/ /srv/git/
+Restart=always
+RestartSec=500ms
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=git-daemon
+User=git
+Group=git
+[Install]
+WantedBy=multi-user.target
+
+最后，你需要运行 systemctl enable git-daemon 以让它在系统启动时自动运行， 这样也能让它通过
+systemctl start git-daemon 启动，通过 systemctl stop git-daemon 停止。
