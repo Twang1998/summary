@@ -99,3 +99,29 @@ CUDA_VISIBLE_DEVICES=1
 > pytorch 计算 `CrossEntropyLoss` 不需要先经 `softmax` 层激活
 >
 > 如果用 `nn.BCELoss（）`计算二进制交叉熵, 需要先将 `logit` 经 `sigmod()`层激活再送入 `nn.BCELoss（）`计算损失。
+
+```
+>>> loss = nn.CrossEntropyLoss()
+>>> input = torch.randn(3, 5, requires_grad=True)
+>>> target = torch.empty(3, dtype=torch.long).random_(5)
+>>> output = loss(input, target)
+>>> output.backward()
+```
+
+输入数据的类型是由要求的，input size （batch × num_class）
+
+label size ()
+
+```
+>>> torch.empty(3, dtype=torch.long).random_(5).shape
+torch.Size([3])   ### 官方写法
+>>> torch.tensor(3)
+tensor(3)
+>>> torch.tensor(3).shape
+torch.Size([])
+>>> torch.tensor([3]).shape
+torch.Size([1])
+>>> torch.tensor([3],dtype=torch.long).shape
+torch.Size([1])  ## 貌似合理
+```
+
