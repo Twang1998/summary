@@ -187,3 +187,13 @@ WantedBy=multi-user.target
 
 最后，你需要运行 systemctl enable git-daemon 以让它在系统启动时自动运行， 这样也能让它通过
 systemctl start git-daemon 启动，通过 systemctl stop git-daemon 停止。
+
+
+
+### [添加gitignore文件后使其生效](https://www.cnblogs.com/AliliWl/p/7880243.html)
+
+```none
+git rm -r --cached . // 删除本地缓存
+git add . // 添加要提交的文件
+git commit -m 'update .gitignore' // 更新本地的缓存
+```
